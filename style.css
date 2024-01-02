@@ -60,3 +60,52 @@ html,body{
 #right_nav button:hover{
     opacity: 50%;
 }
+
+.bottom-page1{
+    position:absolute;
+    bottom: 5%;
+    left: 10%;
+    height: 40vh;
+    width: 50vw;
+}
+
+.bottom-page1>h1{   
+    font-size: 5vw;
+    font-weight: 100;
+    line-height: 1;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+.bottom-page1-inner{
+    position: absolute;
+    bottom: 0%;
+    height: 35%;
+    width: 100%;
+    font-size: 1.5vw;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1;
+    font-weight: 100;
+}
+.bottom-page1-inner>button{
+    padding: 10px 20px;
+    border-radius: 50px; 
+    border:none;
+    background-color: white;
+    color: black;
+    margin-right: 20%;
+    font-size: 1.3vw;
+    /* transform: scaleY(0); */
+    /* transform-origin: bottom center; */
+    /* transition: transform 0.3s; */
+}
+
+.bottom-page1-inner>button:hover{
+    color: white;
+    background-color: black;
+    border: 1px solid #fff;
+    /* transform: scaleY(1); */
+}
