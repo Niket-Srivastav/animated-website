@@ -150,6 +150,45 @@ for (let i = 0; i < frameCount; i++) {
   images.push(img);
 }
 
+
+// gsap.to(imageSeq, { ... }):
+
+// This initiates a Tween animation using GSAP (GreenSock Animation Platform). It animates properties of the imageSeq object.
+// frame: frameCount - 1,:
+
+// It animates the frame property of the imageSeq object from its current value to frameCount - 1. This means it will go through frames from 1 to frameCount - 1.
+// snap: "frame",:
+
+// The snap property ensures that the animation only lands on whole numbers. In this case, it snaps to the closest frame number.
+// ease: "none",:
+
+// The ease property is set to "none," meaning there is no easing effect. The transition is linear, providing a constant speed throughout.
+// scrollTrigger: { ... },:
+
+// This defines the ScrollTrigger settings for the animation. ScrollTrigger is part of GSAP and allows for triggering animations based on scrolling.
+
+// scrub: 0.5,:
+
+// This enables scrubbing, creating a smooth and responsive animation as you scroll. The value 0.5 indicates the sensitivity or the amount of scrubbing.
+// trigger: "#page3",:
+
+// Specifies the trigger element, in this case, the element with the ID "page3". The animation starts when this element enters the viewport.
+// start: "top top",:
+
+// Sets the starting position for the animation. In this case, it starts when the top of the trigger element reaches the top of the viewport.
+// end: "250% top",:
+
+// Defines the end position for the animation. The animation completes when the trigger element is scrolled 250% of its height beyond the top of the viewport.
+// scroller: "#main",:
+
+// Specifies the scroller element. The animation is linked to the scrolling behavior of the element with the ID "main".
+// onUpdate: render,:
+
+// This sets the render function as a callback to be executed on every frame of the animation. The render function likely updates the canvas based on the current frame.
+
+
+
+
 gsap.to(imageSeq, {
   frame: frameCount - 1,
   snap: "frame",
@@ -200,3 +239,23 @@ ScrollTrigger.create({
 });
 }
 canvas()
+
+
+clutter = "";
+
+document.querySelector("#page4>p").textContent.split("").forEach(function(dets){
+    clutter += `<span>${dets}</span>`
+    document.querySelector("#page4>p").innerHTML = clutter;
+})
+
+gsap.to("#page4>p>span",{
+    scrollTrigger:{
+        trigger:`#page4>p>span`,
+        start:`top bottom`,
+        end:`-400% top`,  
+        scroller:`#main`,
+        scrub:1,
+    },
+    stagger:.2,
+    color:`#fff`  
+})
