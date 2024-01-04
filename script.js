@@ -259,3 +259,180 @@ gsap.to("#page4>p>span",{
     stagger:.2,
     color:`#fff`  
 })
+
+
+function canvas1(){
+    const canvas = document.querySelector("#page5>canvas");
+const context = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
+window.addEventListener("resize", function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  render();
+});
+
+
+function files(index) {
+  var data = `
+pictures\\bridges00010.png
+pictures\\bridges00013.png
+pictures\\bridges00016.png
+pictures\\bridges00019.png
+pictures\\bridges00022.png
+pictures\\bridges00025.png
+pictures\\bridges00028.png
+pictures\\bridges00031.png
+pictures\\bridges00034.png
+pictures\\bridges00037.png
+pictures\\bridges00040.png
+pictures\\bridges00043.png
+pictures\\bridges00046.png
+pictures\\bridges00049.png
+pictures\\bridges00052.png
+pictures\\bridges00055.png
+pictures\\bridges00058.png
+pictures\\bridges00061.png
+pictures\\bridges00064.png
+pictures\\bridges00067.png
+pictures\\bridges00070.png
+pictures\\bridges00073.png
+pictures\\bridges00076.png
+pictures\\bridges00079.png
+pictures\\bridges00082.png
+pictures\\bridges00085.png
+pictures\\bridges00088.png
+pictures\\bridges00091.png
+pictures\\bridges00094.png
+pictures\\bridges00097.png
+pictures\\bridges00100.png
+pictures\\bridges00103.png
+pictures\\bridges00106.png
+pictures\\bridges00109.png
+pictures\\bridges00112.png
+pictures\\bridges00115.png
+pictures\\bridges00118.png
+pictures\\bridges00121.png
+pictures\\bridges00124.png
+pictures\\bridges00127.png
+pictures\\bridges00130.png
+pictures\\bridges00133.png
+pictures\\bridges00136.png
+pictures\\bridges00139.png
+pictures\\bridges00142.png
+pictures\\bridges00145.png
+pictures\\bridges00148.png
+pictures\\bridges00151.png
+pictures\\bridges00154.png
+pictures\\bridges00157.png
+pictures\\bridges00160.png
+pictures\\bridges00163.png
+ `;
+  return data.split("\n")[index];
+}
+
+const frameCount = 65;
+
+const images = [];
+const imageSeq = {
+  frame: 1,
+};
+
+for (let i = 0; i < frameCount; i++) {
+  const img = new Image();
+  img.src = files(i);
+  images.push(img);
+}
+
+
+// gsap.to(imageSeq, { ... }):
+
+// This initiates a Tween animation using GSAP (GreenSock Animation Platform). It animates properties of the imageSeq object.
+// frame: frameCount - 1,:
+
+// It animates the frame property of the imageSeq object from its current value to frameCount - 1. This means it will go through frames from 1 to frameCount - 1.
+// snap: "frame",:
+
+// The snap property ensures that the animation only lands on whole numbers. In this case, it snaps to the closest frame number.
+// ease: "none",:
+
+// The ease property is set to "none," meaning there is no easing effect. The transition is linear, providing a constant speed throughout.
+// scrollTrigger: { ... },:
+
+// This defines the ScrollTrigger settings for the animation. ScrollTrigger is part of GSAP and allows for triggering animations based on scrolling.
+
+// scrub: 0.5,:
+
+// This enables scrubbing, creating a smooth and responsive animation as you scroll. The value 0.5 indicates the sensitivity or the amount of scrubbing.
+// trigger: "#page3",:
+
+// Specifies the trigger element, in this case, the element with the ID "page3". The animation starts when this element enters the viewport.
+// start: "top top",:
+
+// Sets the starting position for the animation. In this case, it starts when the top of the trigger element reaches the top of the viewport.
+// end: "250% top",:
+
+// Defines the end position for the animation. The animation completes when the trigger element is scrolled 250% of its height beyond the top of the viewport.
+// scroller: "#main",:
+
+// Specifies the scroller element. The animation is linked to the scrolling behavior of the element with the ID "main".
+// onUpdate: render,:
+
+// This sets the render function as a callback to be executed on every frame of the animation. The render function likely updates the canvas based on the current frame.
+
+
+
+
+gsap.to(imageSeq, {
+  frame: frameCount - 1,
+  snap: "frame",
+  ease: `none`,
+  scrollTrigger: {
+    scrub: .5,
+    trigger: `#page5`,
+    start: `top top`,
+    end: `250% top`,
+    scroller: `#main`,
+  },
+  onUpdate: render,
+});
+
+images[1].onload = render;
+
+function render() {
+  scaleImage(images[imageSeq.frame], context);
+}
+
+function scaleImage(img, ctx) {
+  var canvas = ctx.canvas;
+  var hRatio = canvas.width / img.width;
+  var vRatio = canvas.height / img.height;
+  var ratio = Math.max(hRatio, vRatio);
+  var centerShift_x = (canvas.width - img.width * ratio) / 2;
+  var centerShift_y = (canvas.height - img.height * ratio) / 2;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(
+    img,
+    0,
+    0,
+    img.width,
+    img.height,
+    centerShift_x,
+    centerShift_y,
+    img.width * ratio,
+    img.height * ratio
+  );
+}
+ScrollTrigger.create({
+
+  trigger: "#page5",
+  pin: true,
+  scroller: `#main`,
+  start: `top top`,
+  end: `250% top`,
+});
+}
+canvas1()
